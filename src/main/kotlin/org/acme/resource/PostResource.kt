@@ -1,4 +1,4 @@
-package org.acme
+package org.acme.resource
 
 import javax.sql.DataSource
 import jakarta.ws.rs.*
