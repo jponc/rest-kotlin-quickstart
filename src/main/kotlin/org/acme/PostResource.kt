@@ -30,9 +30,27 @@ class PostResource {
         return postRepository.findById(id)
     }
 
+    @GET
+    @Path("/title/{title}")
+    fun getPostByTitle(@PathParam("title") title: String): List<Post> {
+        println("title: $title")
+        return postRepository.findByTitle(title)
+    }
+
     @POST
     fun createPost(post: Post): Post {
         postRepository.persist(post)
         return post
+    }
+
+    @DELETE
+    @Path("/{id}")
+    fun deletePost(@PathParam("id") id: Long) {
+        val post = postRepository.findById(id)
+        if (post != null) {
+            postRepository.delete(post)
+        } else {
+            throw NotFoundException("Post with ID $id not found")
+        }
     }
 }
